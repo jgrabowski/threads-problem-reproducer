@@ -1,0 +1,106 @@
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_LbqpYOJWEDmKY5XLdJ1DQw" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd http://www.omg.org/spec/DD/20100524/DC DC.xsd http://www.omg.org/spec/DD/20100524/DI DI.xsd " exporter="jBPM Process Modeler" exporterVersion="2.0" targetNamespace="http://www.omg.org/bpmn20">
+  <bpmn2:itemDefinition id="_numberItem" structureRef="String"/>
+  <bpmn2:interface id="_F387A14A-BC7C-49AC-BAED-0CCFE1E114C6_ServiceInterface" name="pl.perfectsource.kogito.bugs.threads.SlowService" implementationRef="pl.perfectsource.kogito.bugs.threads.SlowService">
+    <bpmn2:operation id="_F387A14A-BC7C-49AC-BAED-0CCFE1E114C6_ServiceOperation" name="waitForMe" implementationRef="waitForMe"/>
+  </bpmn2:interface>
+  <bpmn2:process id="SlowSubprocess" drools:packageName="com.example" drools:version="1.0" drools:adHoc="false" name="SlowSubprocess" isExecutable="true" processType="Public">
+    <bpmn2:property id="number" itemSubjectRef="_numberItem" name="number"/>
+    <bpmn2:sequenceFlow id="_B2E99C0F-7ECA-4A3E-A559-F0DC8E35743E" sourceRef="_F387A14A-BC7C-49AC-BAED-0CCFE1E114C6" targetRef="_F0619798-C09C-4ABE-AFA8-62A9C86F5604">
+      <bpmn2:extensionElements>
+        <drools:metaData name="isAutoConnection.target">
+          <drools:metaValue><![CDATA[true]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+    </bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="_D806B1E4-B671-4483-AF97-7226293BDE42" sourceRef="_02C2D513-F339-4E13-85D3-C37087AAC53D" targetRef="_F387A14A-BC7C-49AC-BAED-0CCFE1E114C6"/>
+    <bpmn2:sequenceFlow id="_64B0D25A-FD10-4AD7-9AE6-E5DA69608D6C" sourceRef="_DEBB0231-4548-4500-AF50-2DD33B5093E3" targetRef="_02C2D513-F339-4E13-85D3-C37087AAC53D"/>
+    <bpmn2:intermediateCatchEvent id="_02C2D513-F339-4E13-85D3-C37087AAC53D">
+      <bpmn2:incoming>_64B0D25A-FD10-4AD7-9AE6-E5DA69608D6C</bpmn2:incoming>
+      <bpmn2:outgoing>_D806B1E4-B671-4483-AF97-7226293BDE42</bpmn2:outgoing>
+      <bpmn2:timerEventDefinition>
+        <bpmn2:timeDuration xsi:type="bpmn2:tFormalExpression">PT1S</bpmn2:timeDuration>
+      </bpmn2:timerEventDefinition>
+    </bpmn2:intermediateCatchEvent>
+    <bpmn2:endEvent id="_F0619798-C09C-4ABE-AFA8-62A9C86F5604">
+      <bpmn2:incoming>_B2E99C0F-7ECA-4A3E-A559-F0DC8E35743E</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:serviceTask id="_F387A14A-BC7C-49AC-BAED-0CCFE1E114C6" drools:serviceimplementation="Java" drools:serviceinterface="pl.perfectsource.kogito.bugs.threads.SlowService" drools:serviceoperation="waitForMe" name="Service Task" implementation="Java" operationRef="_F387A14A-BC7C-49AC-BAED-0CCFE1E114C6_ServiceOperation">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[Service Task]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>_D806B1E4-B671-4483-AF97-7226293BDE42</bpmn2:incoming>
+      <bpmn2:outgoing>_B2E99C0F-7ECA-4A3E-A559-F0DC8E35743E</bpmn2:outgoing>
+    </bpmn2:serviceTask>
+    <bpmn2:startEvent id="_DEBB0231-4548-4500-AF50-2DD33B5093E3">
+      <bpmn2:outgoing>_64B0D25A-FD10-4AD7-9AE6-E5DA69608D6C</bpmn2:outgoing>
+    </bpmn2:startEvent>
+  </bpmn2:process>
+  <bpmndi:BPMNDiagram>
+    <bpmndi:BPMNPlane bpmnElement="SlowSubprocess">
+      <bpmndi:BPMNShape id="shape__DEBB0231-4548-4500-AF50-2DD33B5093E3" bpmnElement="_DEBB0231-4548-4500-AF50-2DD33B5093E3">
+        <dc:Bounds height="56" width="56" x="289" y="392"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="shape__F387A14A-BC7C-49AC-BAED-0CCFE1E114C6" bpmnElement="_F387A14A-BC7C-49AC-BAED-0CCFE1E114C6">
+        <dc:Bounds height="102" width="154" x="625" y="369"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="shape__F0619798-C09C-4ABE-AFA8-62A9C86F5604" bpmnElement="_F0619798-C09C-4ABE-AFA8-62A9C86F5604">
+        <dc:Bounds height="56" width="56" x="875" y="392"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="shape__02C2D513-F339-4E13-85D3-C37087AAC53D" bpmnElement="_02C2D513-F339-4E13-85D3-C37087AAC53D">
+        <dc:Bounds height="56" width="56" x="457" y="392"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="edge_shape__DEBB0231-4548-4500-AF50-2DD33B5093E3_to_shape__02C2D513-F339-4E13-85D3-C37087AAC53D" bpmnElement="_64B0D25A-FD10-4AD7-9AE6-E5DA69608D6C">
+        <di:waypoint x="317" y="420"/>
+        <di:waypoint x="485" y="420"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="edge_shape__02C2D513-F339-4E13-85D3-C37087AAC53D_to_shape__F387A14A-BC7C-49AC-BAED-0CCFE1E114C6" bpmnElement="_D806B1E4-B671-4483-AF97-7226293BDE42">
+        <di:waypoint x="485" y="420"/>
+        <di:waypoint x="702" y="420"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="edge_shape__F387A14A-BC7C-49AC-BAED-0CCFE1E114C6_to_shape__F0619798-C09C-4ABE-AFA8-62A9C86F5604" bpmnElement="_B2E99C0F-7ECA-4A3E-A559-F0DC8E35743E">
+        <di:waypoint x="702" y="420"/>
+        <di:waypoint x="952" y="392"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <bpmn2:relationship type="BPSimData">
+    <bpmn2:extensionElements>
+      <bpsim:BPSimData>
+        <bpsim:Scenario id="default" name="Simulationscenario">
+          <bpsim:ScenarioParameters/>
+          <bpsim:ElementParameters elementRef="_DEBB0231-4548-4500-AF50-2DD33B5093E3">
+            <bpsim:TimeParameters>
+              <bpsim:ProcessingTime>
+                <bpsim:NormalDistribution mean="0" standardDeviation="0"/>
+              </bpsim:ProcessingTime>
+            </bpsim:TimeParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters elementRef="_F387A14A-BC7C-49AC-BAED-0CCFE1E114C6">
+            <bpsim:TimeParameters>
+              <bpsim:ProcessingTime>
+                <bpsim:NormalDistribution mean="0" standardDeviation="0"/>
+              </bpsim:ProcessingTime>
+            </bpsim:TimeParameters>
+            <bpsim:ResourceParameters>
+              <bpsim:Availability>
+                <bpsim:FloatingParameter value="0"/>
+              </bpsim:Availability>
+              <bpsim:Quantity>
+                <bpsim:FloatingParameter value="0"/>
+              </bpsim:Quantity>
+            </bpsim:ResourceParameters>
+            <bpsim:CostParameters>
+              <bpsim:UnitCost>
+                <bpsim:FloatingParameter value="0"/>
+              </bpsim:UnitCost>
+            </bpsim:CostParameters>
+          </bpsim:ElementParameters>
+        </bpsim:Scenario>
+      </bpsim:BPSimData>
+    </bpmn2:extensionElements>
+    <bpmn2:source>_LbqpYOJWEDmKY5XLdJ1DQw</bpmn2:source>
+    <bpmn2:target>_LbqpYOJWEDmKY5XLdJ1DQw</bpmn2:target>
+  </bpmn2:relationship>
+</bpmn2:definitions>
